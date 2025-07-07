@@ -1,4 +1,4 @@
---// jbated :3
+--// jbaited :3
 --// rifk..
 	local cheatLoadingStartTick = os.clock()
 
