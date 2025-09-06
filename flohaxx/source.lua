@@ -1,4 +1,6 @@
 --// shit version of it but it doesnt lag so that's the point nigger.
+--// he's using a base64 encoding for this :sob: :sob:
+--// chez if you're here luv u bro :heart:
 	local cheatLoadingStartTick = os.clock()
 
 	local tick = tick
@@ -14216,3 +14218,4 @@ end)
 
 	writefile("bloxsense/bloxsense_configs/" .. "off" .. ".cfg", UILibrary:SaveConfiguration()); 
 	Menu["Settings"]["Configurations"]["Configs"].UpdateValues(getconfigs())
+
