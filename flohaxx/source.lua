@@ -1,5 +1,4 @@
---// jbated :3
---// rifk..
+--// shit version of it but it doesnt lag so that's the point nigger.
 	local cheatLoadingStartTick = os.clock()
 
 	local tick = tick
@@ -5527,8 +5526,8 @@ local radius = 10
 		UILibrary:CreateSubSection("ESP", "DroppedESP", {"Dropped ESP"}, true, 0.4, -8)
 
 		-- Visuals
-		UILibrary:CreateSubSection("Visuals", "ESP", {"Local"}, false, 1, 0)
-		UILibrary:CreateSubSection("Visuals", "CamViewModel", {"Camera", "Viewmodel", "Crosshair", "Particle", "Fumo", "Player"}, true, 0.44, 0)
+		UILibrary:CreateSubSection("Visuals", "ESP", {"Local", "Fumo", "Player"}, false, 1, 0)
+		UILibrary:CreateSubSection("Visuals", "CamViewModel", {"Camera", "Viewmodel", "Crosshair", "Particle"}, true, 0.44, 0)
 		UILibrary:CreateSubSection("Visuals", "RandomESP", {"World", "Bloom", "Atmosphere"}, true, 0.27, -8)
 		UILibrary:CreateSubSection("Visuals", "RandomESP2", {"Misc", "Extra", "Bullets", "Hits", "FOV"}, true, 0.29, -8)
 		
@@ -5589,12 +5588,8 @@ local radius = 10
 		UILibrary:CreateSlider({Name = "Aimbot FOV", Tab = "Rage", Section = "Aimbot", Suffix = "°", MinimumNumber = 0, MaximumNumber = 180, DefaultValue = 180, MaximumText = "Ignored", Tooltip = "Controls how close from the center of your screen an enemy must be before the aimbot considers aiming at them"})
 		UILibrary:CreateButton({Name = "Auto Wall", Tab = "Rage", Section = "Aimbot", Tooltip = "Controls if the aimbot considers people through walls that may be wallbanged"})
 		UILibrary:CreateButton({Name = "Auto Shoot", Tab = "Rage", Section = "Aimbot", Tooltip = "Controls if the aimbot shoots automatically once a target is found"})
+		UILibrary:CreateDropdown({Name = "Auto Shoot Type", Tab = "Rage", Section = "Aimbot", Values = {"Standard", "Aura"}, Tooltip = "Controls the type of Auto Shoot. Aura rapidly kill all targets at the same time regardless of obstruction."})
 
-		UILibrary:CreateButton({Name = "Demonstrate Shooting Animation", Tab = "Rage", Section = "Settings", Tooltip = "Yeah, yeah,yea"})
-		UILibrary:CreateButton({Name = "Bypass Rate Limit", Tab = "Rage", Section = "Settings", Tooltip = "Yeah, yeah,yea"})
-		UILibrary:CreateSlider({Name = "Hit Per Second", Tab = "Rage", Section = "Settings", MinimumNumber = 1, MaximumNumber = 10, Suffix = " HPS", Tooltip = "yeh yeh yeh"})
-		UILibrary:CreateButton({Name = "Custom Gun Icon", Tab = "Rage", Section = "Settings", Tooltip = "Logs Who You Shot At (ragebot only)"})
-		UILibrary:CreateDropdown({Name = "Gun You Want To Change", Tab = "Rage", Section = "Settings", Values = {"Glock", "USP", "CZ", "DesertEagle", "R8", "AK47", "SG" ,"MP9", "P90", "Bizon", "Famas", "Galil", "AUG", "AWP", "Scout", "G3SG1", "CT Knife" ,"T Knife", "Banana", "Bayonet", "Butterfly Knife", "Cleaver", "Crowbar", "Falchion Knife", "Flip Knife", "Gut Knife", "Huntsman Knife", "Karambit", "Sickle", "Multimeter"}})
 		UILibrary:CreateButton({Name = "Hit Logs", Tab = "Rage", Section = "Settings", Tooltip = "Logs Who You Shot At (ragebot only)"})
 		UILibrary:CreateSlider({Name = "Hit Logs Delay", Tab = "Rage", Section = "Settings", MinimumNumber = 0, MaximumNumber = 10, Suffix = " .sec", Tooltip = "yeh yeh yeh"})
 
@@ -5604,10 +5599,12 @@ local radius = 10
 		UILibrary:CreateDropdown({Name = "Knife Bot Type", Tab = "Rage", Section = "Aimbot", Values = {"Single Aura", "Multi Aura"}, Tooltip = "Controls the type of knife bot. Multi Aura rapidly stabs all targets at the same time within the radius regardless of obstruction."})
 
 		UILibrary:CreateSlider({Name = "Maximum Hitscanning Points", Tab = "Rage", Section = "HvH", Suffix = "", MinimumNumber = 8, MaximumNumber = 64, Tooltip = "Controls the maximum number of scans per frame the aimbot is allowed to do. Turn this down for better performance."})
+		UILibrary:CreateSlider({Name = "Hitscan Modifier", Tab = "Rage", Section = "HvH", Suffix = "", MinimumNumber = 10, MaximumNumber = 100, Tooltip = "insert tooltip here"})
 		UILibrary:CreateButton({Name = "Autowall Hitscan", Tab = "Rage", Section = "HvH", Tooltip = "Controls if the aimbot scans around your player for multiple places to shoot from other than your player. Not recommended for typical hack versus hack."})
 		UILibrary:CreateDropdown({Name = "Hitscan Points", Tab = "Rage", Section = "HvH", Values = {"Up", "Down", "Left", "Right", "Forward", "Backward", "Towards"}, MultiChoice = true, Tooltip = "Controls the directions that Autowall Hitscan will attempt to shoot from."})
 		UILibrary:CreateButton({Name = "Resolve Positions", Tab = "Rage", Section = "HvH", Tooltip = "Controls if the aimbot makes an attempt to resolve certain desync exploits. Disable if you are having issues with shooting nowhere near the enemy."})
 		UILibrary:CreateButton({Name = "Wait For Round Start", Tab = "Rage", Section = "HvH", Tooltip = "Controls if the aimbot waits for round start before finding targets."})
+		UILibrary:CreateSlider({Name = "Ping Compensation", Tab = "Rage", Section = "HvH", Suffix = "ms", MinimumNumber = 0, MaximumNumber = 100, Tooltip = " Lower value for high ping, higher value for low ping. Example: 200ms ping = 10, 100ms ping = 20."})
 		UILibrary:CreateButton({Name = "Auto Peek", Tab = "Rage", Section = "HvH", KeyBind = "None", Tooltip = "Hitscans from in front of your camera and teleports you to it if a target is found from it."})
 		UILibrary:CreateButton({Name = "Force Headshots", Tab = "Rage", Section = "HvH", Tooltip = "Controls if the aimbot will make every shot it fires a headshot regardless of the hitbox it really hit."})
 		UILibrary:CreateButton({Name = "Prediction", Tab = "Rage", Section = "HvH", Tooltip = "Controls if the aimbot shoots ahead of the enemy in the direction of their movement to increase the chance of the shot hitting."})
@@ -5625,8 +5622,6 @@ local radius = 10
 		UILibrary:CreateButton({Name = "Multi Point", Tab = "Rage", Section = "HvH", Tooltip = "Controls if the aimbot considers spots on the hitbox outside of the direct center."})
 		UILibrary:CreateSlider({Name = "Multi Point Scale", Tab = "Rage", Section = "HvH", MinimumNumber = 1, MaximumNumber = 8000, Suffix = "%", Tooltip = "Controls up to how far from the direct center of the hitbox the aimbot is allowed to consider shooting at."})
 		UILibrary:CreateDropdown({Name = "Multi Point Points", Tab = "Rage", Section = "HvH", Values = {"Head", "Chest", "Pelvis", "Arms", "Legs", "Feet"}, MultiChoice = true, Tooltip = "Controls which multipoint hitboxes the aimbot will consider. Note that these hitboxes must also be selected in the weapon config."})
-		UILibrary:CreateButton({Name = "Movement Track", Tab = "Rage", Section = "Tracking"})
-		UILibrary:CreateSlider({Name = "How Far", Tab = "Rage", Section = "Tracking", MinimumNumber = 1, MaximumNumber = 100, Suffix = "disc"})
 
 		UILibrary:CreateButton({Name = "Loop Kill", Tab = "Rage", Section = "Hitpart", Tooltip = "loop keel"})
 		UILibrary:CreateDropdown({Name = "Player in Focus", Tab = "Rage", Section = "Hitpart", Values = {}})
@@ -5796,12 +5791,186 @@ local radius = 10
 		UILibrary:CreateSlider({Name = "Roll", Tab = "Visuals", Section = "Viewmodel", MinimumNumber = -180, MaximumNumber = 180, Suffix = "°"})
 
 		UILibrary:CreateButton({Name = "Enable Fumo", Tab = "Visuals", Section = "Fumo"})
+		UILibrary:CreateButton({Name = "Spin Itself", Tab = "Visuals", Section = "Fumo"})
 		UILibrary:CreateButton({Name = "Highlight", Tab = "Visuals", Section = "Fumo", Colors = {Color3.fromRGB(255, 255, 255), Color3.fromRGB(128, 128, 128)}})
-		UILibrary:CreateSlider({Name = "Speed", Tab = "Visuals", Section = "Fumo", MinimumNumber = 0, MaximumNumber = 10, DefaultValue = 0})
-		UILibrary:CreateSlider({Name = "Distance", Tab = "Visuals", Section = "Fumo", MinimumNumber = 0, MaximumNumber = 5, DefaultValue = 0})
+		UILibrary:CreateSlider({Name = "Fill Transparency", Tab = "Visuals", Section = "Fumo", MinimumNumber = 0, MaximumNumber = 100, DefaultValue = 50})
+		UILibrary:CreateSlider({Name = "Outline Transparency", Tab = "Visuals", Section = "Fumo", MinimumNumber = 0, MaximumNumber = 100, DefaultValue = 50})
+		UILibrary:CreateSlider({Name = "Spin Speed", Tab = "Visuals", Section = "Fumo", MinimumNumber = 0, MaximumNumber = 360, DefaultValue = 100})
+		UILibrary:CreateSlider({Name = "Orbit Speed", Tab = "Visuals", Section = "Fumo", MinimumNumber = 0, MaximumNumber = 360, DefaultValue = 100})
+		UILibrary:CreateSlider({Name = "Distance", Tab = "Visuals", Section = "Fumo", MinimumNumber = 0, MaximumNumber = 10, DefaultValue = 6})
+		UILibrary:CreateSlider({Name = "Height", Tab = "Visuals", Section = "Fumo", MinimumNumber = 0, MaximumNumber = 10, DefaultValue = 0})
+		local function ChangeCharacter(model)
+			local character = game.Players.LocalPlayer.Character
+			if not character then return end
+
+			-- Remove all current accessories from the character
+			for _, item in ipairs(character:GetChildren()) do
+				if item:IsA("Accessory") then
+					item:Destroy()
+				end
+			end
+
+			-- Match parts by name and update color and transparency
+			for _, part in ipairs(character:GetDescendants()) do
+				if part:IsA("BasePart") then
+					local newPart = model:FindFirstChild(part.Name, true)
+					if newPart and newPart:IsA("BasePart") then
+						part.Color = newPart.Color
+						part.Transparency = newPart.Transparency
+
+						-- Save original appearance data
+						local colorVal = Instance.new("Color3Value")
+						colorVal.Name = "OriginalColor"
+						colorVal.Value = part.Color
+						colorVal.Parent = part
+
+						local materialVal = Instance.new("StringValue")
+						materialVal.Name = "OriginalMaterial"
+						materialVal.Value = tostring(part.Material)
+						materialVal.Parent = part
+					end
+				end
+			end
+
+			-- Copy head decal (face) from model
+			local head = character:FindFirstChild("Head")
+			local newHead = model:FindFirstChild("Head")
+			if head and newHead then
+				local headDecal = head:FindFirstChildOfClass("Decal")
+				local newHeadDecal = newHead:FindFirstChildOfClass("Decal")
+				if headDecal and newHeadDecal then
+					headDecal.Texture = newHeadDecal.Texture
+				end
+			end
+
+			-- Helper function to copy clothing
+			local function copyClothing(className)
+				local old = character:FindFirstChildOfClass(className)
+				if old then old:Destroy() end
+
+				local new = model:FindFirstChildOfClass(className)
+				if new then
+					local clone = new:Clone()
+					clone.Parent = character
+
+					local value = Instance.new("StringValue")
+					value.Name = "OriginalTexture"
+					value.Value = clone[className .. "Template"]
+					value.Parent = clone
+				end
+			end
+
+			copyClothing("Shirt")
+			copyClothing("Pants")
+
+			-- Copy accessories
+			for _, accessory in ipairs(model:GetChildren()) do
+				if accessory:IsA("Accessory") then
+					local cloned = accessory:Clone()
+					local handle = cloned:FindFirstChild("Handle")
+
+					if handle then
+						for _, weld in ipairs(handle:GetChildren()) do
+							if weld:IsA("Weld") and weld.Part1 then
+								local match = character:FindFirstChild(weld.Part1.Name)
+								if match then
+									weld.Part1 = match
+								end
+							end
+						end
+
+						local colorVal = Instance.new("Color3Value")
+						colorVal.Name = "OriginalColor"
+						colorVal.Value = handle.Color
+						colorVal.Parent = handle
+
+						local materialVal = Instance.new("StringValue")
+						materialVal.Name = "OriginalMaterial"
+						materialVal.Value = tostring(handle.Material)
+						materialVal.Parent = handle
+					end
+
+					cloned.Parent = character
+				end
+			end
+		end
+
+		local function ChangeCharacterToUserIdAvatar(userId)
+			local model = game.Players:CreateHumanoidModelFromUserId(userId)
+
+			-- Remove visual effects that shouldn't transfer
+			for _, descendant in ipairs(model:GetDescendants()) do
+				if descendant:IsA("ParticleEmitter") or
+				descendant:IsA("Trail") or
+				descendant:IsA("Beam") or
+				descendant:IsA("Fire") or
+				descendant:IsA("Sparkles") or
+				descendant:IsA("Smoke") or
+				descendant:IsA("Highlight") then
+					descendant:Destroy()
+				end
+			end
+
+			local fullOutline = model:FindFirstChild("FullOutline")
+			if fullOutline then
+				fullOutline:Destroy()
+			end
+
+			-- Prepare model
+			model.Name = "TargetCharacter"
+			model:WaitForChild("Humanoid")
+
+			ChangeCharacter(model)
+
+			model:Destroy()
+		end
 
 		UILibrary:CreateButton({Name = "Name Changer", Tab = "Visuals", Section = "Player"})
 		UILibrary:CreateTextBox({Name = "Change To", Tab = "Visuals", Section = "Player", Default = "Astralhaxx User"})
+		-- Start character changer loop
+task.spawn(function()
+	while true do
+		task.wait(0.5)
+
+		local enabled = Menu["Visuals"]["Player"]["Character Changer"]["Toggle"]["Enabled"]
+		local player = game:GetService("Players").LocalPlayer
+		local char = player.Character
+		local hasGun = char and char:FindFirstChild("Gun")
+
+		if enabled and hasGun then
+			local userId = Menu["Visuals"]["Player"]["Id"]["Value"]
+			ChangeCharacterToUserIdAvatar(userId)
+	end
+end
+end)
+
+-- Manual button (still usable)
+UILibrary:CreateButton({Name = "Character Changer", Tab = "Visuals",Section = "Player",Callback = function()
+		local enabled = Menu["Visuals"]["Player"]["Character Changer"]["Toggle"]["Enabled"]
+		local player = game:GetService("Players").LocalPlayer
+		local char = player.Character
+		local hasGun = char and char:FindFirstChild("Gun")
+
+		if enabled and hasGun then
+			local userId = Menu["Visuals"]["Player"]["Id"]["Value"]
+			ChangeCharacterToUserIdAvatar(userId)
+		end
+	end
+})
+
+-- TextBox input
+UILibrary:CreateTextBox({Name = "Id", Tab = "Visuals", Section = "Player",Default = "167954881", Callback = function(Value)
+		local enabled = Menu["Visuals"]["Player"]["Character Changer"]["Toggle"]["Enabled"]
+		local player = game:GetService("Players").LocalPlayer
+		local char = player.Character
+		local hasGun = char and char:FindFirstChild("Gun")
+
+		if enabled and hasGun then
+			ChangeCharacterToUserIdAvatar(Value)
+		end
+	end
+})
+
 
 		UILibrary:CreateButton({Name = "Custom Crosshair", Tab = "Visuals", Section = "Crosshair", Colors = {Color3.fromRGB(255, 255, 255)}, Transparency = {0/255}})
 		UILibrary:CreateSlider({Name = "Crosshair Width", Tab = "Visuals", Section = "Crosshair", MinimumNumber = 0, MaximumNumber = 100, DefaultValue = 10})
@@ -6151,6 +6320,7 @@ local radius = 10
 	local materials			= Enum.Material
 	local camera			= workspace.CurrentCamera
 	local localPlayer		= players.localPlayer
+	local crosshairs 		= localPlayer:FindFirstChild("PlayerGui").GUI.Crosshairs
 	local mouse				= localPlayer:GetMouse()
 	local client			= getsenv(localPlayer:FindFirstChild("PlayerGui").Client)
 	local hitPart			= replicatedStorage:WaitForChild("Events", 1/0):WaitForChild("HitPart", 1/0)
@@ -8670,6 +8840,132 @@ if GUI then
     end
 end
 
+-- Accessory Visuals Module
+local model, handle, highlight = nil, nil, nil
+local angle, spin = 0, 0
+local lastAssetId = 0
+
+-- Destroy current accessory and cleanup
+function destroyAccessory()
+    if model then
+        pcall(function() model:Destroy() end)
+        model = nil
+    end
+
+    if handle then
+        pcall(function() handle:Destroy() end)
+        handle = nil
+    end
+
+    highlight = nil
+end
+
+-- Apply highlight effect to the accessory
+function applyHighlight()
+    -- Clear existing highlight
+    if highlight then
+        pcall(function() highlight:Destroy() end)
+        highlight = nil
+    end
+
+    -- Ensure handle is valid
+    if not handle or not handle:IsA("BasePart") or not handle:IsDescendantOf(workspace) then
+        return
+    end
+
+    -- Create new highlight
+    local h = Instance.new("Highlight")
+    h.Name = "AccessoryHighlight"
+    h.Adornee = handle
+    h.Enabled = Menu["Visuals"]["Fumo"]["Highlight"]["Toggle"]["Enabled"]
+	h.FillColor = Menu["Visuals"]["Fumo"]["Highlight"]["Color 1"]["Color"]
+	h.OutlineColor = Menu["Visuals"]["Fumo"]["Highlight"]["Color 2"]["Color"]
+	h.FillTransparency = Menu["Visuals"]["Fumo"]["Fill Transparency"]["Value"]/100
+	h.OutlineTransparency = Menu["Visuals"]["Fumo"]["Outline Transparency"]["Value"]/100
+    h.Parent = handle
+
+    highlight = h
+end
+
+-- Load accessory from asset ID
+function loadAccessory()
+    destroyAccessory()
+
+    local assetId = tonumber(17899556174)
+    if not assetId or assetId <= 0 then return end
+
+    local success, asset = pcall(function()
+        return game:GetObjects("rbxassetid://" .. assetId)[1]
+    end)
+    if not success or typeof(asset) ~= "Instance" then return end
+
+    local part = asset:FindFirstChild("Handle", true)
+    if not part or not part:IsA("BasePart") then return end
+
+    part.Anchored = true
+    part.CanCollide = false
+    part.Transparency = 0
+    part.Parent = workspace
+
+    model = asset
+    handle = part
+
+    applyHighlight()
+end
+
+-- Render loop: update accessory visuals
+runService.RenderStepped:Connect(function(dt)
+    -- Reload accessory if ID changed
+    local currentId = tonumber(17899556174)
+    if currentId ~= lastAssetId then
+        lastAssetId = currentId or 0
+        loadAccessory()
+    end
+
+    -- Hide accessory if disabled
+    if not Menu["Visuals"]["Fumo"]["Enable Fumo"]["Toggle"]["Enabled"] then
+        if handle then handle.Transparency = 1 end
+        if highlight then highlight.Enabled = false end
+        return
+    end
+
+    -- Reload if handle is lost
+    if not handle or not handle:IsDescendantOf(workspace) then
+        loadAccessory()
+        return
+    end
+
+    -- Accessory follows the player
+    local root = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart")
+    if not root then return end
+
+    handle.Transparency = 0
+
+    -- Update highlight settings
+    if highlight then
+        highlight.Enabled = Menu["Visuals"]["Fumo"]["Highlight"]["Toggle"]["Enabled"]
+        highlight.FillColor = Menu["Visuals"]["Fumo"]["Highlight"]["Color 1"]["Color"]
+        highlight.OutlineColor = Menu["Visuals"]["Fumo"]["Highlight"]["Color 2"]["Color"]
+		highlight.FillTransparency = Menu["Visuals"]["Fumo"]["Fill Transparency"]["Value"]/100
+		highlight.OutlineTransparency = Menu["Visuals"]["Fumo"]["Outline Transparency"]["Value"]/100
+    end
+
+    -- Animate accessory movement
+    angle += Menu["Visuals"]["Fumo"]["Orbit Speed"]["Value"] * dt
+    spin += Menu["Visuals"]["Fumo"]["Spin Speed"]["Value"] * dt
+
+    local orbit = Vector3.new(
+        math.cos(math.rad(angle)) * Menu["Visuals"]["Fumo"]["Distance"]["Value"],
+        Menu["Visuals"]["Fumo"]["Height"]["Value"],
+        math.sin(math.rad(angle)) * Menu["Visuals"]["Fumo"]["Distance"]["Value"]
+    )
+
+    handle.Position = root.Position + orbit
+    handle.Orientation = Menu["Visuals"]["Fumo"]["Spin Itself"]["Toggle"]["Enabled"]
+        and Vector3.new(0, spin % 360, 0)
+        or Vector3.zero
+end)
+
 
 
 		function visuals.updateArmChams() -- call this when we feel like it
@@ -8900,17 +9196,66 @@ camera:GetPropertyChangedSignal("FieldOfView"):Connect(function()
 	end
 end)
 
-		function visuals.updateScope(bool)
-			for i, v in next, (localPlayer.PlayerGui.GUI.Crosshairs:GetChildren()) do
-				if v.Name:match("Frame") then
-					v.BackgroundTransparency = bool and 1 or 0
-				elseif v.Name:match("Scope") then
-					v.ImageTransparency = bool and 1 or 0 
-				end
-			end
-		end
+local playerGui = localPlayer:WaitForChild("PlayerGui")
 
-		Menu["Visuals"]["Camera"]["Disable Scope Border"]["Toggle"].Changed:Connect(visuals.updateScope)
+local screenGui = playerGui:FindFirstChild("ScopeGUI")
+if not screenGui then
+    screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "ScopeGUI"
+    screenGui.ResetOnSpawn = false
+    screenGui.IgnoreGuiInset = true
+    screenGui.Parent = playerGui
+end
+
+local scopelb
+local scopeImage = game:GetObjects("rbxassetid://10644136402")[1]
+
+if scopeImage:IsA("Decal") or scopeImage:IsA("Texture") then
+    scopelb = screenGui:FindFirstChild("ScopeLabel") or Instance.new("ImageLabel")
+    scopelb.Name = "ScopeLabel"
+    scopelb.BackgroundTransparency = 1
+    scopelb.AnchorPoint = Vector2.new(0.5, 0.501)
+    scopelb.Position = UDim2.new(0.5, 0, 0.501, 0)
+    scopelb.Size = UDim2.new(0, 233, 0, 227)
+    scopelb.ZIndex = 99999
+    scopelb.Image = scopeImage.Texture or scopeImage.TextureID
+    scopelb.Visible = false
+    scopelb.Parent = screenGui
+end
+
+runService.Heartbeat:Connect(function()
+    if scopelb then
+        if Menu["Visuals"]["Camera"]["Disable Scope Border"]["Toggle"]["Enabled"] then
+            if crosshairs then
+                crosshairs.Scope.ImageTransparency = 1
+                crosshairs.Scope.Scope.Visible = false
+                crosshairs.Scope.Scope.Blur.ImageTransparency = 1
+                crosshairs.Frame1.Transparency = 1
+                crosshairs.Frame2.Transparency = 1
+                crosshairs.Frame3.Transparency = 1
+                crosshairs.Frame4.Transparency = 1
+            end
+			if crosshairs.Frame1.Visible == true then
+				scopelb.Visible = true
+			elseif crosshairs.Frame1.Visible == false then
+            scopelb.Visible = false
+			end
+		
+        else
+            if crosshairs then
+                crosshairs.Scope.ImageTransparency = 0
+                crosshairs.Scope.Scope.Visible = true
+                crosshairs.Scope.Scope.Blur.ImageTransparency = 0
+                crosshairs.Frame1.Transparency = 0
+                crosshairs.Frame2.Transparency = 0
+                crosshairs.Frame3.Transparency = 0
+                crosshairs.Frame4.Transparency = 0
+            end
+
+			
+        end
+    end
+end)
 
 		for i,v in next, players:GetPlayers() do
 			if v ~= localPlayer then
@@ -10337,9 +10682,6 @@ end)
 					return
 				end
 			end
-			if Menu["Visuals"]["Camera"]["Disable Scope Border"]["Toggle"]["Enabled"] and self.Name == "Blur" and self.Parent.Name == "Scope" then
-				v = 0
-			end
 			return oldNIndex(self, k, v)
 		end)
 		local oldIndex; oldIndex = hookmetamethod(game, "__index", function(self, k)
@@ -10869,69 +11211,108 @@ end)
 			--local bodyFireAnimation = debug.getupvalue(client.usethatgun, 29)
 			--bodyFireAnimation:Play()
 		end
-
-		function ragebot.fire(Parameters) -- everything that takes place once someone CAN be shot
-			if client.fgun == "none" then
-				return
-			end
-			if not Menu["Rage"]["Aimbot"]["Silent Aim"]["Toggle"]["Enabled"] then
-				camera.CFrame = newCframe(camera.CFrame.p, ragebot.currenttarget.position)
-			end
-				if Menu["Rage"]["Aimbot"]["Auto Shoot"]["Toggle"]["Enabled"] then
-					local shotsPerSecond = 10
-					local delay = 1 / shotsPerSecond
-					for i = 0, Menu["Rage"]["Settings"]["Hit Per Second"]["Value"] do
-						hitPart:FireServer(
-							Menu["Rage"]["HvH"]["Force Headshots"]["Toggle"]["Enabled"] and Parameters.instance.Parent.Head or Parameters.instance,
-							Parameters.position,
-							not Menu["Rage"]["Settings"]["Custom Gun Icon"]["Toggle"]["Enabled"] and client.fgun.Name or Menu["Rage"]["Settings"]["Gun You Want To Change"]["Value"],
-							client.fgun.Range.Value,
-							localPlayer.Character:FindFirstChild("Gun"),
-							nil,
-							4,
-							false,
-							Parameters.wallbang,
-							Parameters.origin,
-							workspace.DistributedTime.Value,
-							emptyVec3,
-							true,
-							"r",
-							nil,
-							nil,
-							nil,
-							nil,
-							nil,
-							nil,
-							nil,
-							nil,
-							nil,
-							nil,
-							nil
-						)
-					if Menu["Rage"]["Settings"]["Bypass Rate Limit"]["Toggle"]["Enabled"] then
-						task.wait(delay)
-					end
-				end
-			end
-
-			
-			if Menu["Rage"]["Settings"]["Demonstrate Shooting Animation"]["Toggle"]["Enabled"] then
+function ragebot.fire(Parameters) -- everything that takes place once someone CAN be shot
+		if client.fgun == "none" then
+			return
+		end
+		if not Menu["Rage"]["Aimbot"]["Silent Aim"]["Toggle"]["Enabled"] then
+			camera.CFrame = newCframe(camera.CFrame.p, ragebot.currenttarget.position)
+		end
+        if Menu["Rage"]["Aimbot"]["Auto Shoot"]["Toggle"]["Enabled"] then
+            local connection
+            connection = runService.Heartbeat:Connect(function()
+                connection:Disconnect()
+        
+                local origin = Parameters.origin
+        
+                local gunstats = {
+                    maxPenetration = client.fgun.Penetration.Value * 0.02,
+                    maxWalls = 9999e9999,
+                }
+        
+                for _ = 1, client.fgun.Bullets.Value do
+                    hitPart:FireServer(
+                        Menu["Rage"]["HvH"]["Force Headshots"]["Toggle"]["Enabled"]
+                            and Parameters.instance.Parent.Head or Parameters.instance,
+                        Parameters.position,
+                        client.fgun.Name,
+                        -9999e9999,
+                        localPlayer.Character:FindFirstChild("Gun"),
+                        nil,
+                        9999e9999,
+                        false,
+                        Parameters.wallbang,
+                        Parameters.origin,
+                        -9999e9999,
+                        zeroVec3,
+                        true,
+                        "r",
+                        nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil
+                    )
+                end
+        
+        
+                local function getAllValidTargets()
+                    local targets = {}
+                    for _, player in pairs(game.Players:GetPlayers()) do
+                        if player ~= localPlayer and player.Character and player.Character:FindFirstChild("Humanoid") then
+                            if player.Character.Humanoid.Health > 0 then
+                                table.insert(targets, player.Character)
+                            end
+                        end
+                    end
+                    return targets
+                end
+        
+                local targets = getAllValidTargets()
+                for _, target in pairs(targets) do
+                    if Parameters.instance:IsDescendantOf(target) then continue end
+        
+                    local targetPart = Menu["Rage"]["HvH"]["Force Headshots"]["Toggle"]["Enabled"]
+                        and target:FindFirstChild("Head") or target:FindFirstChild("HumanoidRootPart") or target.PrimaryPart
+        
+                    if targetPart then
+                        local canHit = ragebot.autowall(origin, targetPart.Position, {localPlayer.Character}, gunstats)
+                        if canHit then
+                            for _ = 1, client.fgun.Bullets.Value do
+                                hitPart:FireServer(
+                                    targetPart,
+                                    Parameters.position,
+                                    client.fgun.Name,
+                                    -9999e9999,
+                                    localPlayer.Character:FindFirstChild("Gun"),
+                                    nil,
+                                    9999e9999,
+                                    false,
+                                    Parameters.wallbang,
+                                    Parameters.origin,
+                                    -9999e9999,
+                                    zeroVec3,
+                                    true,
+                                    "r",
+                                    nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil
+                                )
+                            end
+                        end
+                    end
+                end
+            end)    
+			if Menu["Rage"]["Aimbot"]["Auto Shoot Type"]["Value"] == "Standard" then
 				ragebot.fakeshoot({walls = Parameters.walls})
 			end
-			if Parameters.origintype == "Auto Peek" then
-				localPlayer.Character.HumanoidRootPart.Position = Parameters.origin
-			end
-			-- Asscoder adds soudns
-			-- stop looking at my girl ragebot
-		
-			if Menu["Rage"]["Settings"]["Hit Logs"]["Toggle"]["Enabled"] then
-				setthreadidentity(3)
-				Library.UI:EventLog("Astralclient Service: Shot at " .. ragebot.currenttarget.player.Name .. " for " .. tostring(math.floor(Parameters.damageInflicted + 0.5)) .. ", in the " .. ragebot.currenttarget.instance.Name .. "\n( " .. tostring(math.clamp(math.floor(Parameters.instance.Parent.Humanoid.Health - (Parameters.damageInflicted * client.gun.Bullets.Value) + 0.5), 0, 100)) .. " hp remaining)" .. " (type: " .. Parameters.type .. ", origin: " .. Parameters.origintype .. ")", Menu["Rage"]["Settings"]["Hit Logs Delay"]["Value"])
-				setthreadidentity(8)
-			end
-		end
-		
 
+
+			if Menu["Rage"]["HvH"]["Hit Logs"]["Toggle"]["Enabled"] then
+				local target = ragebot.currenttarget
+				local gun = client.fgun
+			
+				if target and target.player and target.instance and gun and gun.Name then
+					local message = "Shot at " .. ragebot.currenttarget.player.Name .. " for " .. tostring(math.floor(Parameters.damageInflicted + 0.5)) .. ", in the " .. ragebot.currenttarget.instance.Name .. "\n( " .. tostring(math.clamp(math.floor(Parameters.instance.Parent.Humanoid.Health - (Parameters.damageInflicted * client.gun.Bullets.Value) + 0.5), 0, 100)) .. " hp remaining)" .. " (type: " .. Parameters.type .. ", origin: " .. Parameters.origintype .. ")"
+					UILibrary:EventLog(message, Menu["Rage"]["HvH"]["Hit Logs Delay"]["Value"])
+				end
+			end			
+		end
+	end 
 		--warning autowall is kinda scuffed it ,makes u look like stormy paste user
 		--nnvm i know how to fix fix
 
@@ -11143,7 +11524,7 @@ end)
 			origins[1 + #origins] = {from, "Base"}
 			local base = newCframe(from, from + camera.CFrame.LookVector.unit)
 
-			local factor = 10
+			local factor = Menu["Rage"]["HvH"]["Hitscan Modifier"]["Value"]
 			if Menu["Rage"]["HvH"]["Autowall Hitscan"]["Toggle"]["Enabled"] then
 				local offsetOrigins = {}
 				if table.find(Menu["Rage"]["HvH"]["Hitscan Points"]["Value"], "Up") ~= nil then
@@ -11245,16 +11626,6 @@ end)
             end
         end
     end
-    -- LOL LOL ODFL HDUJKL:DRUo2w7op3474tukmh
-    game:GetService("RunService").RenderStepped:Connect(function()
-        for i, v in pairs(game:GetService("Players"):GetPlayers()) do
-            if Menu["Rage"]["Tracking"]["Movement Track"]["Toggle"]["Enabled"] then
-                if alive == true and v.Team ~= game.Players.LocalPlayer.Team and v ~= game.Players.LocalPlayer then
-                    v.Character.Head.Position = v.Character.HumanoidRootPart.Position + v.Character.Humanoid.MoveDirection * Menu["Rage"]["Tracking"]["How Far"]["Value"]
-                end
-            end
-        end
-    end)
 
 			-- since we have backtracking and are able to shoot at where the enemy was previously, try to scan their previous positions
 			if Menu["Rage"]["Tracking"]["Back Tracking"]["Toggle"]["Enabled"] then
@@ -11539,103 +11910,126 @@ end)
 			end		
 		end
 		
-	function ragebot.think() -- Invaded#5143 (girl)
-		if not (localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") and Menu["Rage"]["Aimbot"]["Enabled"]["Toggle"]["Enabled"] and Menu["Rage"]["Aimbot"]["Enabled"]["Bind"]["Active"]) or not client.fgun or client.fgun == "none" or Menu["Misc"]["Extra"]["Kill All"]["Toggle"]["Enabled"] then
-			ragebot.currenttarget.player = nil
-			ragebot.currenttarget.instance = nil
-			ragebot.currenttarget.position = nil
-			ragebot.currenttarget.modifier = nil
-			ragebot.currenttarget.wallbang = nil
-			ragebot.currenttarget.origin = nil
-			ragebot.currenttarget.pInfo = nil
-			return -- we cannot shoot at all at this time
-		end
-
-		local gun = replicatedStorage.Weapons:FindFirstChild(client.fgun.Name);
-		if tick() - ragebot.lastshot < gun.FireRate.Value or tick() - ragebot.lastreload < gun.ReloadTime.Value then
-			return -- firerate restrikkt
-		end
-
-		ragebot.currenttarget.player = nil
-		ragebot.currenttarget.instance = nil
-		ragebot.currenttarget.position = nil
-		ragebot.currenttarget.modifier = nil
-		ragebot.currenttarget.wallbang = nil
-		ragebot.currenttarget.origin = nil
-		ragebot.currenttarget.pInfo = nil
-
-		if workspace.Status.Preparation.Value and Menu["Rage"]["HvH"]["Wait For Round Start"]["Toggle"]["Enabled"] then
-			return -- we are to wait until the round has started before doing anything
-		end
 		
+	function ragebot.think()
+    local char = localPlayer.Character
+    local hrp = char and char:FindFirstChild("HumanoidRootPart")
+    local menuRage = Menu["Rage"]
+    local menuMisc = Menu["Misc"]
+    local aimbotMenu = menuRage["Aimbot"]
+    local now = tick()
 
-		local enemies = {}
-		for i, pInfo in next, (playerInfo.storage) do
-			if pInfo.alive and pInfo.enemy and not (pInfo.protected or pInfo.god) then
-				if Menu["Rage"]["Aimbot"]["Aimbot FOV"]["Value"] == 180 or (math.abs(math.deg(math.acos((camera.CFrame.LookVector):Dot(newCframe(camera.CFrame.p, pInfo.character.HumanoidRootPart.Position).LookVector))))) * 2 < Menu["Rage"]["Aimbot"]["Aimbot FOV"]["Value"] then
-					enemies[1 + #enemies] = {player = pInfo.player, pInfo = pInfo}
-				end
-			end
-		end
+    local function resetTarget()
+        local ct = ragebot.currenttarget
+        ct.player, ct.instance, ct.position = nil, nil, nil
+        ct.modifier, ct.wallbang, ct.origin, ct.pInfo = nil, nil, nil, nil
+    end
 
-		if #enemies < 1 then return end -- no enemies
+    if not (hrp and aimbotMenu["Enabled"]["Toggle"]["Enabled"] and aimbotMenu["Enabled"]["Bind"]["Active"])
+        or not client.fgun or client.fgun == "none"
+        or menuMisc["Extra"]["Kill All"]["Toggle"]["Enabled"] then
+        resetTarget()
+        return
+    end
 
-		local result
-		if gun:FindFirstChild("Melee") and Menu["Rage"]["Aimbot"]["Knife Bot"]["Toggle"]["Enabled"] then -- okay so we're holding our knifebot so we need to use our knifebot
-			result = ragebot.knifebot()
-		else -- okay no knife, ragebot.scan!!
-			ragebot.currentindex = ragebot.currentindex + 1 -- okay lets move to the next idx in the enemies table (scan the next enemy)
-			if ragebot.currentindex > #enemies then -- okay that idx is too high so go back to 1
-				ragebot.currentindex = 1
-			end
-			result = ragebot.scan(enemies[ragebot.currentindex])
-		end
+    local gun = replicatedStorage.Weapons:FindFirstChild(client.fgun.Name)
+    if aimbotMenu["Auto Shoot Type"]["Value"] == "Standard" then
+        if now - ragebot.lastshot < gun.FireRate.Value or now - ragebot.lastreload < gun.ReloadTime.Value then
+            return
+        end
+    end
 
-		if not result then return end -- couldnt hit
+    resetTarget()
 
-		ragebot.currenttarget.player = result.player
-		ragebot.currenttarget.instance = result.instance
-		ragebot.currenttarget.position = result.to[1]
-		ragebot.currenttarget.modifier = result.damagemodifier
-		ragebot.currenttarget.wallbang = result.wallbang
-		ragebot.currenttarget.origin = result.from[1]
-		ragebot.currenttarget.pInfo = result.pInfo
+    prepWaitUntil = prepWaitUntil or 0
+    if workspace.Status.Preparation.Value and menuRage["HvH"]["Wait For Round Start"]["Toggle"]["Enabled"] then
+        if prepWaitUntil == 0 then
+            local pingComp = menuRage["HvH"]["Ping Compensation"]["Value"] / 10
+            local ping = game.Stats.PerformanceStats.Ping:GetValue() * pingComp / 1000
+            prepWaitUntil = now + 6 - ping
+        end
+        if now < prepWaitUntil then
+            return
+        end
+    else
+        prepWaitUntil = 0
+    end
 
-		if not gun:FindFirstChild("Melee") and (result.damage < result.pInfo.humanoid.health or Menu["Rage"]["Aimbot"]["Auto Shoot"]["Toggle"]["Enabled"] == false) then
-			ragebot.currentindex = ragebot.currentindex - 1 -- rescan this person as we did not deliver a lethal hit
-		end
+    local enemies = {}
+    local fov = aimbotMenu["Aimbot FOV"]["Value"]
 
-		ragebot.fire({ -- fire at them
-			origin = result.from[1],
-			instance = result.instance,
-			position = result.to[1],
-			damageMultiplier = result.damagemodifier,
-			wallbang = result.wallbang,
-			normal = emptyVec3,
-			damageInflicted = result.damage,
-			type = result.to[2],
-			origintype = result.from[2],
-			walls = result.walls
-		})
+    for _, pInfo in next, playerInfo.storage do
+        if pInfo.alive and pInfo.enemy and not (pInfo.protected or pInfo.god) then
+            local dir = (pInfo.character.HumanoidRootPart.Position - camera.CFrame.p).Unit
+            local angle = math.deg(math.acos(camera.CFrame.LookVector:Dot(dir))) * 2
+            if fov == 180 or angle < fov then
+                enemies[#enemies + 1] = {player = pInfo.player, pInfo = pInfo}
+            end
+        end
+    end
 
-		if Menu["Rage"]["Aimbot"]["Auto Shoot"]["Toggle"]["Enabled"] then
-			ragebot.lastshot = tick()
+    if #enemies == 0 then return end
 
-			local shifting = Menu["Rage"]["Aimbot"]["Double Tap"]["Value"] == "Fast" and 10/64 or Menu["Rage"]["Aimbot"]["Double Tap"]["Value"] == "Faster" and 12/64 or Menu["Rage"]["Aimbot"]["Double Tap"]["Value"] == "Fastest" and 14/64
+    local result
+    if gun:FindFirstChild("Melee") and aimbotMenu["Knife Bot"]["Toggle"]["Enabled"] then
+        result = ragebot.knifebot()
+    else
+        ragebot.currentindex = (ragebot.currentindex % #enemies) + 1
+        result = ragebot.scan(enemies[ragebot.currentindex])
+    end
 
-			if shifting and tick() - ragebot.lastdt > shifting * 2 then -- ok we have dt and have another chance in a sec
-				ragebot.lastdt = tick()
-				ragebot.lastshot = tick() - shifting -- tickbase shifting simulation 2022
-			end
-		end
-	end
+    if not result then return end
+
+    local ct = ragebot.currenttarget
+    ct.player = result.player
+    ct.instance = result.instance
+    ct.position = result.to[1]
+    ct.modifier = result.damagemodifier
+    ct.wallbang = result.wallbang
+    ct.origin = result.from[1]
+    ct.pInfo = result.pInfo
+
+    if not gun:FindFirstChild("Melee") and (result.damage < result.pInfo.humanoid.health or not aimbotMenu["Auto Shoot"]["Toggle"]["Enabled"]) then
+        ragebot.currentindex = ragebot.currentindex - 1
+    end
+
+    ragebot.fire({
+        origin = result.from[1],
+        instance = result.instance,
+        position = result.to[1],
+        damageMultiplier = result.damagemodifier,
+        wallbang = result.wallbang,
+        normal = emptyVec3,
+        damageInflicted = result.damage,
+        type = result.to[2],
+        origintype = result.from[2],
+        walls = result.walls
+    })
+
+    if aimbotMenu["Auto Shoot"]["Toggle"]["Enabled"] then
+        ragebot.lastshot = now
+
+        local dtMode = aimbotMenu["Double Tap"]["Value"]
+        local shiftTime = (dtMode == "Fast" and 10/64) or
+                          (dtMode == "Faster" and 12/64) or
+                          (dtMode == "Fastest" and 14/64)
+
+        if shiftTime then
+            ragebot.lastdt = ragebot.lastdt or 0
+            if now - ragebot.lastdt > shiftTime * 2 then
+                ragebot.lastdt = now
+                ragebot.lastshot = now - shiftTime
+            end
+        end
+    end
+end
+
 	runService.Heartbeat:Connect(function(d)
 		--debug.profilebegin("ragebot think")
 		ragebot.think(d)
 		--debug.profileend()
-	end)
+	end)	
 end
-
 
 	do --ANCHOR Misc
 		misc.oldmoney = 0
@@ -11723,7 +12117,9 @@ misc.updateweaponstats = function()
             end
         end
     end
-	
+
+
+   
     -- Handle Infinite Ammo
     if Menu["Misc"]["Weapon Modifications"]["Infinite Ammo"]["Toggle"]["Enabled"] then
 		game:GetService("Players").LocalPlayer.PlayerGui.GUI.AmmoGUI.AmmoClip.Text = 'Astral'
