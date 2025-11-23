@@ -2840,8 +2840,6 @@ do
         end
 
         local Table = {}
-        local RemoteEvent = ReplicatedStorage.Events.ApplyGun
-
         for lolhowmanyniggerswegotrn = 1, 10000 do
             table.insert(Table, lolhowmanyniggerswegotrn)
         end
